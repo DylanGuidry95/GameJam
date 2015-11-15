@@ -4,6 +4,14 @@ using System.Collections;
 
 public class UI_Actions : MonoBehaviour
 {
+	void Update()
+	{
+		if(TimeKeeper.globalScale == 0)
+		{
+			GetComponent<Button>().interactable = true;
+		}
+	}
+
 	public void EnableDisable(Button other)
 	{
 		other.interactable = !other.interactable;
@@ -21,18 +29,18 @@ public class UI_Actions : MonoBehaviour
 
 	public void SetTimeScale(float a_scale)
 	{
-		Time.timeScale = a_scale;
+		TimeKeeper.SetTimeScale(a_scale);
 	}
 
 	public void ToggleTime()
 	{
-		if(Time.timeScale == 0)
+		if(TimeKeeper.globalScale == 0)
 		{
-			Time.timeScale = 1;
+			TimeKeeper.SetTimeScale(1);
 		}
 		else
 		{
-			Time.timeScale = 0;
+			TimeKeeper.SetTimeScale(0);
 		}
 	}
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -21,12 +21,11 @@ public class Stats : MonoBehaviour
 	[SerializeField]
 	public float currentEnergy;
 	public float maxEnergy;
-	private Vector3 originalScale;
+
 	public float growthTimer; 
 
 	void Awake()
 	{
-		originalScale = transform.lossyScale;
 		_fsm = new FSM<CSTATES>();
 		AddStates();
 		AddTransitions();
@@ -57,18 +56,15 @@ public class Stats : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		Debug.Log("Start");
 		_fsm.Transition(_fsm.state, CSTATES.e_Idle);
 		_fsm.Transition(_fsm.state, CSTATES.e_Shrinking);
 		minEnergy = 0;
 		currentEnergy = maxEnergy / 2;
-
-		if(FindObjectOfType<GrowthGauge>().gameObject)
+		if(FindObjectOfType<GrowthGage>().gameObject == true)
 		{
-			GameObject meter = FindObjectOfType<GrowthGauge>().gameObject;
-			meter.GetComponent<GrowthGauge>().energy = currentEnergy;
+			GameObject meter = FindObjectOfType<GrowthGage>().gameObject;
+			meter.GetComponent<GrowthGage>().energy = currentEnergy;
 		}
-
 		StartCoroutine(Shrinking());
 	}
 
@@ -93,13 +89,15 @@ public class Stats : MonoBehaviour
 
 	IEnumerator Shrinking()
 	{
-		Debug.Log(_fsm.state);
 		while(_fsm.state == CSTATES.e_Shrinking)
 		{
-			currentEnergy -= Time.deltaTime; 
-			if(currentEnergy <= minEnergy && tag == "Player")
+			if(TimeKeeper.globalScale > 0)
 			{
-				_fsm.Transition(_fsm.state, CSTATES.e_Dead);
+				currentEnergy -= Time.deltaTime;
+				if(currentEnergy <= minEnergy && tag == "Player")
+				{
+					_fsm.Transition(_fsm.state, CSTATES.e_Dead);
+				}
 			}
 			yield return null;
 		}
@@ -122,19 +120,19 @@ public class Stats : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
-		transform.localScale = new Vector3(currentEnergy * originalScale.x, currentEnergy * originalScale.y, currentEnergy * originalScale.z);
-		GameObject meter = FindObjectOfType<GrowthGauge>().gameObject;
-		meter.GetComponent<GrowthGauge>().energy = currentEnergy;
-
-
-		if(_fsm.state == CSTATES.e_Dead)
+		if(TimeKeeper.globalScale > 0)
 		{
-			StopAllCoroutines();
-			Destroy(gameObject);
-		}
+			transform.localScale = new Vector3(currentEnergy, currentEnergy, currentEnergy);
+			GameObject meter = FindObjectOfType<GrowthGage>().gameObject;
+			meter.GetComponent<GrowthGage>().energy = currentEnergy;
+			if(_fsm.state == CSTATES.e_Dead)
+			{
+				StopAllCoroutines();
+				Destroy(gameObject);
+			}
 
-		Time.timeScale = currentEnergy / maxEnergy * 2;
+			TimeKeeper.SetTimeScale(currentEnergy / maxEnergy * 2);
+		}
 
 	}
 
