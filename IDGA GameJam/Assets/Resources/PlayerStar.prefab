@@ -8,10 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 411350}
-  - 33: {fileID: 3383644}
-  - 135: {fileID: 13554760}
-  - 23: {fileID: 2319562}
   - 54: {fileID: 5475300}
+  - 33: {fileID: 3383644}
+  - 23: {fileID: 2319562}
+  - 135: {fileID: 13554760}
   - 135: {fileID: 13532040}
   - 114: {fileID: 11403526}
   - 114: {fileID: 11426942}
