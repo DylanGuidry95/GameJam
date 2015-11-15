@@ -16,15 +16,16 @@ public class Progression : MonoBehaviour
 		Count
 	}
 
-	public int stage;
+
 	public float RoundTimer;
 	public float GameTime;
 	GameObject player;
 	public float timeMod;
 	public eSTAGES cStage;
+	private int stage;
 	// Use this for initialization
 	void Start () 
-	{
+	{	stage = (int)cStage;
 		player = GameObject.FindWithTag("Player");
 		StageTracker();
 	}
@@ -55,17 +56,17 @@ public class Progression : MonoBehaviour
 		case eSTAGES.Star:
 			RoundTimer = 60 * 5;
 			GameTime = RoundTimer;
-			player.GetComponent<RadialSpawner>().SelectUnit(0);
+			GetRadialSpawner(stage);
 			break;
 		case eSTAGES.Sun:
 			RoundTimer = 60 * 5;
 			GameTime = RoundTimer;
-			player.GetComponent<RadialSpawner>().SelectUnit(1);
+			GetRadialSpawner(stage);
 			break;
 		case eSTAGES.Planet1:
 			RoundTimer = 60 * 5;
 			GameTime = RoundTimer;
-			player.GetComponent<RadialSpawner>().SelectUnit(2);
+			GetRadialSpawner(stage);
 			break;
 		case eSTAGES.Planet2:
 			RoundTimer = 60 * 5;
@@ -74,12 +75,12 @@ public class Progression : MonoBehaviour
 		case eSTAGES.Moon:
 			RoundTimer = 60 * 5;
 			GameTime = RoundTimer;
-			player.GetComponent<RadialSpawner>().SelectUnit(3);
+			GetRadialSpawner(stage);
 			break;
 		case eSTAGES.Life:
 			RoundTimer = 60 * 3;
 			GameTime = RoundTimer;
-			player.GetComponent<RadialSpawner>().SelectUnit(4);
+			GetRadialSpawner(stage);
 			break;
 		case eSTAGES.BlackHole:
 			Lose ("blackhole");
@@ -87,6 +88,12 @@ public class Progression : MonoBehaviour
 		default:
 			break;
 		}
+	}
+
+	void GetRadialSpawner(int n)
+	{
+		if(player.GetComponent<RadialSpawner>())
+			player.GetComponent<RadialSpawner>().SelectUnit(n);
 	}
 
 	void Lose(string msg)
