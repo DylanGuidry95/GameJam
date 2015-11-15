@@ -8,7 +8,7 @@ public class LifeProgress : MonoBehaviour
 	{
 		max = transform.localScale.y;
 		transform.localScale =
-			new Vector3(transform.localScale.x, 0.5f, transform.localScale.z);
+			new Vector3(transform.localScale.x, 0.3f, transform.localScale.z);
 		
 		time = time == 0 ? 1 : time;
 	}

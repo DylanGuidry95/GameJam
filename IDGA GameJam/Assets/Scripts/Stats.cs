@@ -123,8 +123,11 @@ public class Stats : MonoBehaviour
 		if(TimeKeeper.globalScale > 0)
 		{
 			transform.localScale = new Vector3(currentEnergy, currentEnergy, currentEnergy);
+			if(FindObjectOfType<GrowthGage>())
+			{
 			GameObject meter = FindObjectOfType<GrowthGage>().gameObject;
 			meter.GetComponent<GrowthGage>().energy = currentEnergy;
+			}
 			if(_fsm.state == CSTATES.e_Dead)
 			{
 				StopAllCoroutines();
