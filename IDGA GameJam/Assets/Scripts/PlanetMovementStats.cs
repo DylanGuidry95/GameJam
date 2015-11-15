@@ -5,6 +5,7 @@ public class PlanetMovementStats : MonoBehaviour
 {
 	public float rotationSpeed;
 	public float orbitSpeed;
+	public float positionFromSun;
 	[SerializeField]
 	private float _orbitPos;
 
