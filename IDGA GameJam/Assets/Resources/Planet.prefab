@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 406826}
   - 33: {fileID: 3319990}
   - 23: {fileID: 2369178}
-  - 95: {fileID: 9521004}
   - 114: {fileID: 11460540}
   m_Layer: 0
   m_Name: Planet
@@ -62,23 +61,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190112}
   m_Mesh: {fileID: 4300000, guid: 87efc044b24e6e645ad883f2303087ae, type: 3}
---- !u!95 &9521004
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190112}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 87efc044b24e6e645ad883f2303087ae, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11460540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,8 +72,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f60b8ef30e6424c85e23128f53529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0
-  orbitSpeed: 0
+  rotationSpeed: 10
+  orbitSpeed: 1
+  positionFromSun: 0
   _orbitPos: 0
 --- !u!1001 &100100000
 Prefab:
@@ -99,7 +82,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: orbitSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 190112}
